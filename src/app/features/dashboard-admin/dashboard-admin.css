@@ -1,0 +1,93 @@
+.login-container{
+  max-width:420px;
+  margin:4.2rem auto;
+  padding:20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;
+  box-shadow:var(--card-shadow);
+  text-align:center;
+}
+
+.login-container input{width:100%; margin:0.6rem 0; background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--text); padding:8px 10px; border-radius:8px}
+
+.error{ color:var(--danger); margin-top:1rem }
+
+.dashboard-container{ padding:20px }
+
+.dashboard-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; gap:12px }
+.dashboard-header .header-left h2{ margin:0; font-size:1.4rem; font-weight:800; color:var(--text) }
+.dashboard-header .header-left .muted{ color:var(--muted); margin-top:6px; font-size:0.95rem }
+.dashboard-header .header-right{ display:flex; align-items:center; gap:12px }
+.search-wrap{ width:260px }
+.search-input{ width:100%; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--text) }
+.actions button{ margin-left:0.5rem }
+
+.stats-grid{ display:flex; gap:12px; margin-bottom:18px }
+.stat-card{ background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px 18px; border-radius:12px; min-width:120px; text-align:center; box-shadow:var(--card-shadow) }
+.stat-value{ font-size:1.4rem; font-weight:800; color:var(--text) }
+.stat-label{ font-size:0.85rem; color:var(--muted); margin-top:6px }
+
+.table-card{ padding:12px; border-radius:12px }
+.table-card .p-datatable-table thead th{ background:transparent; color:var(--muted); font-weight:700 }
+.table-card .p-datatable-table tbody tr td{ color:var(--text); vertical-align:middle }
+.badge{ display:inline-block; padding:4px 8px; border-radius:999px; font-weight:700; font-size:0.9rem }
+.badge-success{ background:linear-gradient(90deg,var(--success), #059669); color:#021413 }
+.badge-muted{ background:rgba(255,255,255,0.03); color:var(--muted) }
+.chip{ display:inline-block; padding:6px 10px; border-radius:999px; font-size:0.85rem }
+.chip-new{ background:linear-gradient(90deg,var(--accent),var(--primary)); color:var(--text); font-weight:700 }
+.chip-no{ background:rgba(255,255,255,0.03); color:var(--muted) }
+
+/* Responsive for dashboard */
+@media (max-width:900px){
+  .stats-grid{ flex-wrap:wrap; gap:10px }
+  .stat-card{ flex:1 1 40% }
+}
+
+@media (max-width:640px){
+  .stats-grid{ flex-direction:column }
+  .stat-card{ width:100% }
+  .table-card{ padding:8px }
+  .table-card .p-datatable-wrapper{ overflow:auto }
+}
+
+/* Dialog form: single column on small screens */
+@media (max-width:520px){
+  .product-dialog .form-grid{ grid-template-columns:1fr }
+  .product-dialog .full-width{ grid-column:unset }
+}
+
+/* Responsive table behaviour: horizontal + vertical scroll and mobile column hiding */
+.responsive-table{ width:100%; overflow:auto; -webkit-overflow-scrolling:touch }
+.table-card .p-datatable-wrapper{ max-height:60vh; overflow:auto }
+.table-card .p-datatable-table{ min-width:720px }
+
+/* On small screens hide less critical columns (Nuevo, Fecha) to improve readability */
+@media (max-width:640px){
+  .table-card .p-datatable-table thead th:nth-child(4),
+  .table-card .p-datatable-table thead th:nth-child(5),
+  .table-card .p-datatable-table tbody td:nth-child(4),
+  .table-card .p-datatable-table tbody td:nth-child(5){
+    display:none;
+  }
+
+  /* make action buttons compact */
+  .table-card .p-button-text.p-button-sm{ padding:6px; margin:0 2px }
+  .table-card .p-button-text .pi{ font-size:0.9rem }
+}
+
+/* If screen is very narrow, allow the table to be full-width but keep scrolling */
+@media (max-width:420px){
+  .table-card .p-datatable-table{ min-width:640px }
+}
+
+.product-dialog .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; padding:0.4rem 0 }
+.product-dialog .form-field{ display:flex; flex-direction:column }
+.product-dialog label{ font-weight:600; margin-bottom:0.3rem; color:var(--muted) }
+.product-dialog input, .product-dialog select, .product-dialog p-inputnumber{ width:100%; background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.05); padding:8px; border-radius:8px }
+.product-dialog .form-checkbox{ display:flex; align-items:center; margin-top:0.5rem }
+.product-dialog .full-width{ grid-column:span 2 }
+.dialog-footer{ display:flex; justify-content:flex-end; gap:1rem }
+
+:host ::ng-deep .p-dialog-content{ padding-top:1.5rem !important }
+:host ::ng-deep .p-dialog-header{ background:transparent; color:var(--text); font-weight:700 }
+:host ::ng-deep .p-dialog{ border-radius:12px }

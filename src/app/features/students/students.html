@@ -1,0 +1,19 @@
+<section class="estudiantes-page container">
+  <header class="students-header">
+    <h2>Nuestro Equipo de Desarrollo</h2>
+    <p class="lead">Un equipo multidisciplinario que construye experiencias de usuario increíbles.</p>
+  </header>
+
+  <div class="students-grid">
+    <article class="student-card" *ngFor="let estudiante of estudiantes">
+      <div class="avatar-wrap">
+        <img [src]="estudiante.imagen" alt="{{ estudiante.nombre }}" class="avatar" />
+      </div>
+      <div class="student-body">
+        <h3 class="student-name">{{ estudiante.nombre }}</h3>
+        <p class="student-role">{{ estudiante.carrera }}</p>
+        <p class="student-desc">{{ estudiante.descripcion }}</p>
+      </div>
+    </article>
+  </div>
+</section>

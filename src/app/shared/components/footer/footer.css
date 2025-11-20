@@ -1,0 +1,23 @@
+.footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 20px;
+  margin-top:28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  color:var(--muted);
+  font-size:0.9rem;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+
+.footer .logo img{
+  height:44px; width:44px; border-radius:12px; object-fit:cover;
+}
+
+.footer a{ color:var(--accent)}
+
+@media (max-width:640px){
+  .footer{ flex-direction:column; gap:8px; align-items:center; text-align:center }
+  .footer .logo img{ height:40px; width:40px }
+  .footer span{ display:block }
+}

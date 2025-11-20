@@ -1,0 +1,9 @@
+main{
+    background: transparent;
+    min-height: calc(100vh - 120px);
+    padding: 24px 0;
+}
+
+.app-header{
+    padding: 12px 0;
+}

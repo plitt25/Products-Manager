@@ -1,0 +1,39 @@
+<section class="products-page">
+  <div class="products-grid">
+    @if (products$ | async; as products) { @if (products.length > 0) { @for
+    (product of products; track product.id) {
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img [src]="product.image" [alt]="product.name" />
+        <span class="tag new" *ngIf="product.isNew; else usadoTag">Nuevo</span>
+        <ng-template #usadoTag>
+          <span class="tag used">Usado</span>
+        </ng-template>
+        <span *ngIf="product.promo" class="tag promo">
+          -{{ product.porcentPromo }}%
+        </span>
+      </div>
+      <div class="card-content">
+        <h3>{{ product.name }}</h3>
+        <div class="price-container">
+          <span class="old-price" *ngIf="product.promo">
+            {{ product.price | currency : "COP" : "symbol" : "1.0-0" }}
+          </span>
+          <span class="final-price">
+            {{
+              product.promo
+                ? product.price * (1 - product.porcentPromo! / 100)
+                : (product.price | currency : "COP" : "symbol" : "1.0-0")
+            }}
+          </span>
+        </div>
+      </div>
+    </div>
+    } } @else {
+    <p class="no-products">No se encontraron productos en esta categoría.</p>
+    } } @else {
+    <p>Cargando productos...</p>
+    }
+  </div>
+</section>
+<p-toast></p-toast>

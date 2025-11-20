@@ -1,0 +1,197 @@
+<div *ngIf="!adminService.checkAuth()" class="login-container">
+  <h2>Iniciar Sesión</h2>
+  <div>
+    <input
+      type="text"
+      pInputText
+      placeholder="Usuario"
+      [(ngModel)]="username"
+    />
+  </div>
+  <div>
+    <input
+      type="password"
+      pInputText
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+    />
+  </div>
+  <button pButton label="Ingresar" (click)="login()"></button>
+  <p *ngIf="loginError" class="error">{{ loginError }}</p>
+</div>
+
+<div *ngIf="adminService.checkAuth()" class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="header-left">
+      <h2>Dashboard Admin</h2>
+      <p class="muted">Gestiona tus productos desde aquí</p>
+    </div>
+    <div class="header-right">
+      <div class="actions">
+        <button
+          pButton
+          label="Agregar Producto"
+          icon="pi pi-plus"
+          (click)="openNew()"
+        ></button>
+        <button
+          pButton
+          label="Cerrar sesión"
+          icon="pi pi-sign-out"
+          class="p-button-danger"
+          (click)="logout()"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">{{ productsCount }}</div>
+      <div class="stat-label">Productos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ promoCount }}</div>
+      <div class="stat-label">En promoción</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ newCount }}</div>
+      <div class="stat-label">Nuevos</div>
+    </div>
+  </div>
+
+  <div class="table-card card">
+    <div class="responsive-table">
+      <p-table [value]="products" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Promo</th>
+        <th>Nuevo</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency : "COP" : "symbol" }}</td>
+        <td>
+          <span class="badge" [ngClass]="{'badge-success': product.promo, 'badge-muted': !product.promo}">
+            {{ product.promo ? ('-' + product.porcentPromo + '%') : '—' }}
+          </span>
+        </td>
+        <td>
+          <span class="chip" [ngClass]="{'chip-new': product.isNew, 'chip-no': !product.isNew}">{{ product.isNew ? 'Nuevo' : '—' }}</span>
+        </td>
+        <td>{{ product.createdAt | date : "short" }}</td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-text p-button-sm"
+            (click)="editProduct(product)"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-text p-button-sm p-button-danger"
+            (click)="deleteProduct(product)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+<p-dialog
+  header="{{ editingProduct ? 'Editar Producto' : 'Nuevo Producto' }}"
+  [(visible)]="displayDialog"
+  [modal]="true"
+  [closable]="false"
+  [style]="{ width: '90vw', maxWidth: '600px' }"
+  class="product-dialog"
+>
+  <div class="form-grid">
+    <!-- Nombre -->
+    <div class="form-field">
+      <label for="name">Nombre</label>
+      <input
+        id="name"
+        type="text"
+        pInputText
+        [(ngModel)]="productForm.name"
+        required
+      />
+    </div>
+
+    <!-- Precio -->
+    <div class="form-field">
+      <label for="price">Precio</label>
+      <p-inputNumber
+        id="price"
+        [(ngModel)]="productForm.price"
+        mode="currency"
+        currency="COP"
+        locale="es-CO"
+        [min]="0"
+      ></p-inputNumber>
+    </div>
+
+    <!-- Producto nuevo -->
+    <div class="form-checkbox">
+      <p-checkbox [(ngModel)]="productForm.isNew" binary="true"></p-checkbox>
+      <label class="ml-2">¿Producto nuevo?</label>
+    </div>
+
+    <!-- En promoción -->
+    <div class="form-checkbox">
+      <p-checkbox
+        [(ngModel)]="productForm.promo"
+        binary="true"
+        (ngModelChange)="onPromoChange()"
+      ></p-checkbox>
+      <label class="ml-2">¿En promoción?</label>
+    </div>
+
+    <!-- Descuento -->
+    <div class="form-field" *ngIf="productForm.promo">
+      <label for="porcentPromo">Descuento (%)</label>
+      <p-inputNumber
+        id="porcentPromo"
+        [(ngModel)]="productForm.porcentPromo"
+        [min]="1"
+        [max]="100"
+        suffix="%"
+        [showButtons]="true"
+      ></p-inputNumber>
+    </div>
+
+    <div class="form-field full-width">
+      <label for="image">Imagen (URL)</label>
+      <input
+        id="image"
+        type="text"
+        pInputText
+        [(ngModel)]="productForm.image"
+        placeholder="https://..."
+      />
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="dialog-footer">
+      <button
+        pButton
+        label="Cancelar"
+        class="p-button-text"
+        (click)="displayDialog = false"
+      ></button>
+      <button pButton label="Guardar" (click)="saveProduct()"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+<p-toast></p-toast>
