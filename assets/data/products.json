@@ -1,0 +1,5 @@
+[
+  { "id": "1", "name": "Body de algodón", "price": 25000, "image": "assets/images/body.jpg", "catalogId": "ropa", "promo": true },
+  { "id": "2", "name": "Conjunto de invierno", "price": 48000, "image": "assets/images/conjunto.jpg", "catalogId": "ropa" },
+  { "id": "3", "name": "Sonajero", "price": 15000, "image": "assets/images/sonajero.jpg", "catalogId": "juguetes", "promo": true }
+]
