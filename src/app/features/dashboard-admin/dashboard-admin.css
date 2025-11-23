@@ -84,6 +84,18 @@
 .product-dialog .form-field{ display:flex; flex-direction:column }
 .product-dialog label{ font-weight:600; margin-bottom:0.3rem; color:var(--muted) }
 .product-dialog input, .product-dialog select, .product-dialog p-inputnumber{ width:100%; background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.05); padding:8px; border-radius:8px }
+
+/* Ensure PrimeNG inner inputs inherit our text color inside the dialog */
+:host ::ng-deep .product-dialog .p-inputtext,
+:host ::ng-deep .product-dialog input,
+:host ::ng-deep .product-dialog .p-inputnumber input {
+  color: var(--text) !important;
+}
+
+/* Placeholder should be slightly muted, but visible */
+:host ::ng-deep .product-dialog input::placeholder {
+  color: var(--muted) !important;
+}
 .product-dialog .form-checkbox{ display:flex; align-items:center; margin-top:0.5rem }
 .product-dialog .full-width{ grid-column:span 2 }
 .dialog-footer{ display:flex; justify-content:flex-end; gap:1rem }
