@@ -121,6 +121,7 @@
       <label for="name">Nombre</label>
       <input
         id="name"
+          name="name"
         type="text"
         pInputText
         [(ngModel)]="productForm.name"
@@ -133,6 +134,7 @@
       <label for="price">Precio</label>
       <p-inputNumber
         id="price"
+          name="price"
         [(ngModel)]="productForm.price"
         mode="currency"
         currency="COP"
@@ -143,13 +145,14 @@
 
     <!-- Producto nuevo -->
     <div class="form-checkbox">
-      <p-checkbox [(ngModel)]="productForm.isNew" binary="true"></p-checkbox>
+      <p-checkbox name="isNew" [(ngModel)]="productForm.isNew" binary="true"></p-checkbox>
       <label class="ml-2">¿Producto nuevo?</label>
     </div>
 
     <!-- En promoción -->
     <div class="form-checkbox">
       <p-checkbox
+        name="promo"
         [(ngModel)]="productForm.promo"
         binary="true"
         (ngModelChange)="onPromoChange()"
@@ -162,6 +165,7 @@
       <label for="porcentPromo">Descuento (%)</label>
       <p-inputNumber
         id="porcentPromo"
+        name="porcentPromo"
         [(ngModel)]="productForm.porcentPromo"
         [min]="1"
         [max]="100"
@@ -174,6 +178,7 @@
       <label for="image">Imagen (URL)</label>
       <input
         id="image"
+        name="image"
         type="text"
         pInputText
         [(ngModel)]="productForm.image"

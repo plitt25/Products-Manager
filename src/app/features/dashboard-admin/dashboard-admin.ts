@@ -100,6 +100,8 @@ export class DashboardAdmin implements OnInit {
   public openNew() {
     this.editingProduct = false;
     this.resetForm();
+    console.log('Opening new product dialog', this.productForm);
+    this.cd.detectChanges();
     this.displayDialog = true;
   }
 
@@ -124,6 +126,8 @@ export class DashboardAdmin implements OnInit {
   public editProduct(product: Product) {
     this.editingProduct = true;
     this.productForm = { ...product };
+    console.log('Editing product', this.productForm);
+    this.cd.detectChanges();
     this.displayDialog = true;
   }
 
