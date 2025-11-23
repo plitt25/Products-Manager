@@ -103,3 +103,23 @@
 :host ::ng-deep .p-dialog-content{ padding-top:1.5rem !important }
 :host ::ng-deep .p-dialog-header{ background:transparent; color:var(--text); font-weight:700 }
 :host ::ng-deep .p-dialog{ border-radius:12px }
+
+/* Force all text inside the product dialog to be black (including inputs/placeholders) */
+:host ::ng-deep .product-dialog,
+:host ::ng-deep .product-dialog * {
+  color: #000000 !important;
+}
+
+/* Ensure PrimeNG inner inputs inherit black text color */
+:host ::ng-deep .product-dialog .p-inputtext,
+:host ::ng-deep .product-dialog input,
+:host ::ng-deep .product-dialog .p-inputnumber input,
+:host ::ng-deep .product-dialog textarea,
+:host ::ng-deep .product-dialog .p-checkbox .p-checkbox-label {
+  color: #000000 !important;
+}
+
+/* Placeholder: slightly muted but dark */
+:host ::ng-deep .product-dialog input::placeholder {
+  color: rgba(0,0,0,0.65) !important;
+}
